@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Batalha das 12 Casas - Zodíaco </title>
+  <link rel="stylesheet" href="./style.css">
+
+</head>
+<body>
+
+  <div class="container">
+    <h1>✧ Batalha das 12 Casas</h1>
+
+    <input type="text" id="nome" placeholder="Nome">
+    <input type="number" id="cosmo" placeholder="Cosmo inicial">
+
+    <label>
+      <input type="checkbox" id="sacrificio">
+      Sacrificar sentidos
+    </label>
+
+    <button onclick="iniciarJornada()">Iniciar</button>
+
+    <div id="resultado"></div>
+  </div>
+
+  <script>
+    function iniciarJornada() {
+      const nome = document.getElementById("nome").value;
+      let cosmo = +document.getElementById("cosmo").value;
+
+      const sacrificar = document.getElementById("sacrificio").checked;
+      cosmo = sacrificar ? cosmo * 2 : cosmo;
+
+      let casas = 12;
+      let danoPorCasa = 100;
+
+      for (let i = 1; i <= casas; i++) {
+        cosmo = cosmo >= danoPorCasa ? cosmo - danoPorCasa : cosmo;
+      }
+
+      let resultadoDiv = document.getElementById("resultado");
+
+      if (cosmo >= 1000) {
+        resultadoDiv.className = "vitoria";
+        resultadoDiv.innerText = `Você venceu com ${cosmo} de cosmo.`;
+      } else {
+        resultadoDiv.className = "derrota";
+        resultadoDiv.innerText = `Derrotado. Cosmo final: ${cosmo}.`;
+      }
+    }
+  </script>
+
+</body>
+</html>
